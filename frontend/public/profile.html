@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - PicShare</title>
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="dashboard.html" class="logo">
+                <i class="fa-solid fa-camera"></i>
+                <span>PicShare</span>
+            </a>
+            
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="profile-header">
+                <div id="profile-avatar" class="profile-avatar">
+                    <img src="" alt="Profile Picture" id="profile-avatar">
+                </div>
+                <div class="profile-info">
+                    <div class="profile-name-actions">
+                        <h1 id="profile-name"></h1>
+                        <div class="profile-actions">
+                        
+                        </div>
+                    </div>
+
+                    <div class="profile-bio">
+                        <p class="username" id="profile-username"></p>
+                        <div id="profile-bio-text"style="">
+                            <p>Photographer | Nature lover | Travel enthusiast</p>
+                            <p>Sharing moments through my lens 📸</p>
+                        </div>
+                        <p id="profile-website"><a href="" target="_blank"></a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-tabs">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="posts">
+                        <i class="fa-solid fa-table-cells"></i> Posts
+                        
+                    </button>
+                </div>
+                
+                <div class="tab-content active" id="posts-tab">
+                    <div class="photo-grid" id="posts-grid">
+                        <!-- Posts will be dynamically added here -->
+                    </div>
+                </div>
+                
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal" id="edit-profile-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Profile</h2>
+                <button class="close-modal"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-profile-form">
+                    <div class="form-group">
+                        <div class="edit-avatar">
+                            <img src="https://source.unsplash.com/random/150x150/?person" alt="Profile Picture" id="edit-avatar">
+                            <div class="avatar-overlay">
+                                <i class="fa-solid fa-camera"></i>
+                                <span>Change Photo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-name">Name</label>
+                        <input type="text" id="edit-name" value="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-username">Username</label>
+                        <input type="text" id="edit-username" value="johndoe">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-bio">Bio</label>
+                        <textarea id="edit-bio"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline close-modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal-overlay"></div>
+<script src="profile.js"></script>
+   
+<!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const user = JSON.parse(currentUser);
+
+            // Populate profile data
+            document.getElementById('profile-name').textContent = user.name;
+            document.getElementById('profile-username').textContent = `@${user.username}`;
+            document.getElementById('profile-avatar').src = user.avatar;
+            document.getElementById('posts-count').textContent = user.stats.posts;
+            document.getElementById('followers-count').textContent = user.stats.followers;
+            document.getElementById('following-count').textContent = user.stats.following;
+
+            // Populate bio
+            const bioContainer = document.getElementById('profile-bio-text');
+            bioContainer.innerHTML = '';
+            if (user.bio) {
+                const bioLines = user.bio.split('\n');
+                bioLines.forEach(line => {
+                    if (line.trim()) {
+                        const p = document.createElement('p');
+                        p.textContent = line;
+                        bioContainer.appendChild(p);
+                    }
+                });
+            }
+
+            // Populate website
+            const websiteElement = document.getElementById('profile-website');
+            if (user.website) {
+                const a = websiteElement.querySelector('a');
+                a.href = user.website.startsWith('http') ? user.website : `https://${user.website}`;
+                a.textContent = user.website;
+            } else {
+                websiteElement.style.display = 'none';
+            }
+
+            // Logout functionality
+            document.getElementById('logout-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+            });
+
+            // Tab switching
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons and contents
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = this.getAttribute('data-tab') + '-tab';
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Modal functionality
+            const editProfileBtn = document.getElementById('edit-profile-btn');
+            const modalOverlay = document.getElementById('modal-overlay');
+            const editProfileModal = document.getElementById('edit-profile-modal');
+            const closeModalBtns = document.querySelectorAll('.close-modal');
+            
+            editProfileBtn.addEventListener('click', function() {
+                modalOverlay.classList.add('show');
+                editProfileModal.classList.add('show');
+                
+                // Populate form with current user data
+                document.getElementById('edit-name').value = user.name;
+                document.getElementById('edit-username').value = user.username;
+                document.getElementById('edit-bio').value = user.bio;
+                document.getElementById('edit-website').value = user.website;
+                document.getElementById('edit-avatar').src = user.avatar;
+            });
+            
+            closeModalBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    modalOverlay.classList.remove('show');
+                    editProfileModal.classList.remove('show');
+                });
+            });
+            
+            // Close modal when clicking outside
+            modalOverlay.addEventListener('click', function() {
+                modalOverlay.classList.remove('show');
+                editProfileModal.classList.remove('show');
+            });
+            
+            // Prevent modal close when clicking inside the modal
+            editProfileModal.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+            
+            // Form submission
+            const editProfileForm = document.getElementById('edit-profile-form');
+            editProfileForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('edit-name').value;
+                const username = document.getElementById('edit-username').value;
+                const bio = document.getElementById('edit-bio').value;
+                const website = document.getElementById('edit-website').value;
+                
+                // Update user data
+                user.name = name;
+                user.username = username;
+                user.bio = bio;
+                user.website = website;
+                
+                // Save updated user data
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                
+                // Update UI
+                document.getElementById('profile-name').textContent = name;
+                document.getElementById('profile-username').textContent = `@${username}`;
+                
+                // Update bio
+                bioContainer.innerHTML = '';
+                const bioLines = bio.split('\n');
+                bioLines.forEach(line => {
+                    if (line.trim()) {
+                        const p = document.createElement('p');
+                        p.textContent = line;
+                        bioContainer.appendChild(p);
+                    }
+                });
+                
+                // Update website
+                if (website) {
+                    websiteElement.style.display = 'block';
+                    const a = websiteElement.querySelector('a');
+                    a.href = website.startsWith('http') ? website : `https://${website}`;
+                    a.textContent = website;
+                } else {
+                    websiteElement.style.display = 'none';
+                }
+                
+                // Close modal
+                modalOverlay.classList.remove('show');
+                editProfileModal.classList.remove('show');
+            });
+
+            // Load mock photos
+            loadMockPhotos();
+        });
+
+        function loadMockPhotos() {
+            // Generate mock photos
+            const generatePhotos = (count) => {
+                const photos = [];
+                for (let i = 1; i <= count; i++) {
+                    photos.push({
+                        id: i,
+                        imageUrl: `https://source.unsplash.com/random/300x300/?nature,${i}`,
+                        likes: Math.floor(Math.random() * 100),
+                        comments: Math.floor(Math.random() * 20)
+                    });
+                }
+                return photos;
+            };
+
+            // Render photos to grid
+            const renderPhotos = (photos, containerId) => {
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                
+                photos.forEach(photo => {
+                    const photoItem = document.createElement('div');
+                    photoItem.className = 'photo-item';
+                    photoItem.innerHTML = `
+                        <a href="photo-detail.html?id=${photo.id}">
+                            <img src="${photo.imageUrl}" alt="Photo ${photo.id}">
+                            <div class="photo-overlay">
+                                <div class="photo-stat"><i class="fa-solid fa-heart"></i> ${photo.likes}</div>
+                                <div class="photo-stat"><i class="fa-solid fa-comment"></i> ${photo.comments}</div>
+                            </div>
+                        </a>
+                    `;
+                    container.appendChild(photoItem);
+                });
+            };
+
+            // Render photos for each tab
+            renderPhotos(generatePhotos(9), 'posts-grid');
+            renderPhotos(generatePhotos(4), 'saved-grid');
+            renderPhotos(generatePhotos(2), 'tagged-grid');
+        }
+    </script> -->
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PicShare - Share Your Photos</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="container header-container">
+        <a href="/" class="logo">
+          <i class="fa-solid fa-camera"></i>
+                <h1>PicShare</h1>  
+        </a>
+        <div class="search-container">
+          
+        <div class="actions">
+          <button class="btn btn-icon search-mobile" aria-label="Search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <span class="sr-only">Search</span>
+          </button>
+          <button class="btn btn-icon" aria-label="Upload photo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <span class="sr-only">Upload</span>
+          </button>
+          <button class="btn btn-primary" aria-label="Create new post">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon-left">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="16"></line>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+           <a href="posts.html" class="btn-link">
+  <span class="btn-text">New Post</span>
+</a>
+            <span class="btn-text-mobile">Post</span>
+          </button>
+          <div class="avatar"id="profile-avatar" style="height: 50px;width: 50px;">
+           
+               <img src="https://via.placeholder.com/32" alt="User profile">
+         
+          </div>
+           <a href="profile.html">Profile</a>
+        </div>
+      </div>
+    </header>
+    <main class="main">
+      <div class="container">
+        <div class="photo-grid" id="photo-grid">
+          <!-- Photos will be inserted here by JavaScript -->
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="dashboard.js"></script>
+  <script src="profile.js"></script>
+</body>
+</html>

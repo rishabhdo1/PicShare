@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Circles - PicShare</title>
+    <link rel="stylesheet" href="circle1.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <a href="dashboard.html" class="logo">
+                        <i class="fa-solid fa-camera"></i>
+                        <span>PicShare</span>
+                    </a>
+                    
+                    <nav class="nav">
+                        <a href="dashboard.html" class="nav-link">
+                            <i class="fa-solid fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="posts.html" class="nav-link">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>New Post</span>
+                        </a>
+                        <a href="profile.html" class="nav-link">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </nav>
+                    
+                    <div class="user-menu">
+                        <div class="avatar"id="profile-avatar">
+                            <img src="https://via.placeholder.com/40" alt="User">
+                        </div>
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-item" id="logout-btn">
+                                <i class="fa-solid fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <div class="container">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="header-content">
+                        <div class="header-text">
+                            <h1 class="page-title">My Circles</h1>
+                            <p class="page-subtitle">Share special moments with your closest friends and family</p>
+                        </div>
+                        <button class="btn btn-primary" id="create-circle-btn">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Create Circle</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Circles Grid -->
+                <div class="circles-section">
+                    <div class="circles-grid" id="circles-grid">
+                        <!-- Loading State -->
+                        <div class="loading-container" id="loading">
+                            <div class="loading-spinner">
+                                <i class="fa-solid fa-spinner fa-spin"></i>
+                            </div>
+                            <p>Loading your circles...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Circle Details Modal -->
+    <div class="modal-overlay" id="circle-details-modal" aria-hidden="true">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title-section">
+                    <h2 id="circle-details-name" class="modal-title">Circle Name</h2>
+                    <p id="circle-details-description" class="modal-subtitle">Circle description</p>
+                </div>
+                <button class="modal-close" id="close-details-modal" aria-label="Close modal">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="circle-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-number" id="member-count">0</span>
+                            <span class="stat-label">Members</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-images"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-number" id="photo-count">0</span>
+                            <span class="stat-label">Photos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-sections">
+                    <!-- Members Section -->
+                    <div class="section">
+                        <div class="section-header">
+                            <h3 class="section-title">
+                                <i class="fa-solid fa-users"></i>
+                                Members
+                            </h3>
+                            <button class="btn btn-primary btn-sm" id="add-members-btn">
+                                <i class="fa-solid fa-user-plus"></i>
+                                Add Members
+                            </button>
+                        </div>
+                        <div class="members-grid" id="members-grid">
+                            <!-- Members will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Instagram-style Photos Feed -->
+                    <div class="section">
+                        <div class="section-header">
+                            <h3 class="section-title">
+                                <i class="fa-solid fa-images"></i>
+                                Photos
+                            </h3>
+                        </div>
+                        <div class="instagram-feed" id="circle-photos-grid">
+                            <!-- Photos will be loaded here in Instagram style -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Circle Modal -->
+    <div class="modal-overlay" id="create-circle-modal" aria-hidden="true">
+        <div class="modal modal-small">
+            <div class="modal-header">
+                <h2 class="modal-title">Create New Circle</h2>
+                <button class="modal-close" id="close-create-modal" aria-label="Close modal">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <form id="create-circle-form" class="form">
+                    <div class="form-group">
+                        <label for="circle-name" class="form-label">Circle Name</label>
+                        <input type="text" id="circle-name" class="form-input" placeholder="Enter circle name..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="circle-description" class="form-label">Description (Optional)</label>
+                        <textarea id="circle-description" class="form-textarea" placeholder="Describe your circle..." rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancel-create">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Create Circle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Members Modal -->
+    <div class="modal-overlay" id="add-members-modal" aria-hidden="true">
+        <div class="modal modal-small">
+            <div class="modal-header">
+                <h2 class="modal-title">Add Members to Circle</h2>
+                <button class="modal-close" id="close-add-members-modal" aria-label="Close modal">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="search-container">
+                    <div class="search-input-wrapper">
+                        <i class="fa-solid fa-search search-icon"></i>
+                        <input type="text" id="member-search" class="form-input search-input" placeholder="Search users by name or email...">
+                    </div>
+                </div>
+                
+                <div class="search-results" id="search-results"id="profile-avatar">
+                    <!-- Search results will appear here -->
+                    <div class="empty-search-state">
+                        <i class="fa-solid fa-search"></i>
+                        <p>Search for users to add to your circle</p>
+                    </div>
+                </div>
+                
+                <div class="selected-members-container">
+                    <h4 class="selected-members-title">Selected Users</h4>
+                    <div class="selected-members" id="selected-members">
+                        <!-- Selected members will appear here -->
+                        <div class="empty-selection">
+                            <p>No users selected yet</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-add-members">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirm-add-members" disabled>Add to Circle</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="circle.js"></script>
+    <script src="profile.js"></script>
+    
+</body>
+</html>

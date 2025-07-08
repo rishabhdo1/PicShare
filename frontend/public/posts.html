@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post - Photogram</title>
+    <link rel="stylesheet" href="posts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fa-solid fa-camera"></i>
+                <a href="dashboard.html"><h1>PicShare</h1></a>
+            </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="create-post">
+            <h2>Create New Post</h2>
+            <form id="create-post-form">
+                <div class="image-upload" id="image-upload-container">
+                    <div class="upload-placeholder" id="upload-placeholder">
+                        <i class="far fa-image"></i>
+                        <p>Click to upload an image</p>
+                        <input type="file" id="image-upload" accept="image/*" hidden>
+                    </div>
+                    <div class="image-preview" id="image-preview">
+                        <button type="button" class="remove-image" id="remove-image"><i class="fas fa-times"></i></button>
+                        <img id="preview-img" src="/placeholder.svg" alt="Preview">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="caption">Caption</label>
+                    <textarea id="caption" placeholder="Write a caption..."></textarea>
+                </div>
+                <button type="submit" class="share-btn" disabled>Share</button>
+            </form>
+        </div>
+    </main>
+
+    <div class="mobile-nav">
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i></a></li>
+            <li><a href="#"><i class="fas fa-search"></i></a></li>
+            <li class="active"><a href="create.html"><i class="far fa-plus-square"></i></a></li>
+            <li><a href="#"><i class="far fa-heart"></i></a></li>
+            <li><a href="profile.html"><i class="far fa-user"></i></a></li>
+        </ul>
+    </div>
+
+    <script src="posts.js"></script>
+</body>
+</html>

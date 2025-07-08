@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Photogram</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-logo">
+                <i class="fa-solid fa-camera"></i>
+                <h1>PicShare</h1>
+            </div>
+            <form id="signup-form">
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="full name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                 <div class="form-group">
+                    <input type="text" id="bio" placeholder="Bio" required>
+                </div>
+                <div class="form-group">
+                    <p>profile pic</p>
+                    <input type="file" id="avatar" placeholder="Avatar"accept="image/*" required>
+                </div>
+                <button type="submit" class="auth-btn">Sign Up</button>
+            </form>
+            <div class="auth-separator">
+                <span>OR</span>
+            </div>
+            <p class="auth-switch">
+                Have an account? <a href="index.html">Log in</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="signup.js"></script>
+</body>
+</html>
